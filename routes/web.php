@@ -19,3 +19,6 @@ $router->get('/', function () use ($router) {
 $router->post('/register', 'Pages\UserController@registerUser');
 
 $router->post('/login','Pages\UserController@authenticateUser');
+
+$router->post('/testlogin', 'Pages\EmissionsController@index');
+
