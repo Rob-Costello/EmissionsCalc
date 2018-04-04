@@ -10,14 +10,51 @@ class UserTest extends TestCase
      *
      * @return void
      */
-    public function testUserLoginWithSuperUserAccount()
+    
+
+    /*public function testRegiserUserReturnSuccess()
     {
-       $this->visit('/register')
-         ->type('SuperUser', 'name')
-         ->check('Remember Me')
-         ->press('Login')
-         ->seePageIs('/dashboard');
-       
+
+        $this->post('/register',['email' => 'testyMcTestFace@test.com1',
+                                'codas_account'=>'1234556',
+                                'business' =>'test business', 
+                                'password' => 'HelloW0rld!'])
+        ->seeJson(['status'=>'success']);
         
+    }*/
+
+    public function testRegiserUserReturnFailedInvalidPassword()
+    {
+
+        $this->post('/register',['email' => 'testyMcTestFace@test.com1',
+                                'codas_account'=>'1234556',
+                                'business' =>'test business', 
+                                'password' => 'HelloWrld!'])
+        ->seeJson(['status'=>'failed']);
     }
+
+    public function testLoginUserReturnSuccessful(){
+
+        $this->post('/login',['email' => 'testyMcTestFace@test.com', 
+                            'password' => 'HelloW0rld!'])
+        ->seeJson(['status'=>'success']);
+
+    }
+
+     public function testLoginUserReturnFailedInvalidPassword(){
+
+        $this->post('/login',['email' => 'testyMcTestFace@test.com', 
+                            'password' => 'HelloW0ld!'])
+        ->seeJson(['status'=>'failed']);
+
+    }
+
+     public function testLoginUserReturnFailedInvalidEmail(){
+
+        $this->post('/login',['email' => 'tesyMcTestFace@test.com', 
+                            'password' => 'HelloW0ld!'])
+        ->seeJson(['status'=>'failed']);
+
+    }
+
 }

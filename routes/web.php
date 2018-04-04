@@ -14,3 +14,8 @@
 $router->get('/', function () use ($router) {
     return $router->app->version();
 });
+
+
+$router->post('/register', 'Pages\UserController@registerUser');
+
+$router->post('/login','Pages\UserController@authenticateUser');
